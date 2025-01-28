@@ -1,0 +1,24 @@
+[
+    {
+    "id": 1,
+    "title": "Laptop Gamer",
+    "description": "Laptop potente con RTX 3080 y 32GB RAM",
+    "code": "LAP123",
+    "price": 1500,
+    "status": true,
+    "stock": 5,
+    "category": "Electrónica",
+    "thumbnails": ["img/laptop1.png"]
+    },
+    {
+    "id": 2,
+    "title": "Teclado Mecánico",
+    "description": "Teclado mecánico RGB con switches rojos",
+    "code": "TEC456",
+    "price": 80,
+    "status": true,
+    "stock": 20,
+    "category": "Periféricos",
+    "thumbnails": ["img/teclado1.png"]
+    }
+]  

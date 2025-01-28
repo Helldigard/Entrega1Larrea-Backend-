@@ -1,0 +1,18 @@
+{
+  "name": "entrega1larrea",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ignacio",
+  "license": "ISC",
+  "description": "Primera entrega del curso de Desarrollo Avanzado de Backend",
+  "dependencies": {
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "moment": "^2.30.1",
+    "mongoose": "^8.9.5"
+  }
+}
