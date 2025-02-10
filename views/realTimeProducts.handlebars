@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Tiempo Real</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { color: #333; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 10px; border: 1px solid #ddd; margin: 5px; }
+        button { padding: 10px 15px; background: blue; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Lista de Productos en Tiempo Real</h1>
+    <ul id="productList"></ul>
+
+    <button onclick="addProduct()">Agregar Producto Aleatorio</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // 📌 Escuchar la actualización de productos y renderizar la lista
+        socket.on("updateProducts", (products) => {
+            const productList = document.getElementById("productList");
+            productList.innerHTML = "";
+            products.forEach(product => {
+                productList.innerHTML += `<li><strong>${product.title}</strong> - $${product.price}</li>`;
+            });
+        });
+
+        // 📌 Simulación de agregar productos desde el cliente
+        function addProduct() {
+            const newProduct = {
+                title: "Producto " + Math.floor(Math.random() * 100),
+                description: "Producto generado aleatoriamente",
+                code: "PRD" + Math.floor(Math.random() * 1000),
+                price: Math.floor(Math.random() * 500),
+                stock: 10,
+                category: "General",
+                thumbnails: []
+            };
+            socket.emit("newProduct", newProduct);
+        }
+    </script>
+</body>
+</html>
