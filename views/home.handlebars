@@ -1,22 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        h1 { color: #333; }
-        ul { list-style: none; padding: 0; }
-        li { padding: 10px; border: 1px solid #ddd; margin: 5px; }
-    </style>
-</head>
-<body>
-    <h1>Lista de Productos</h1>
-    <ul>
-        {{#each products}}
-            <li><strong>{{title}}</strong> - ${{price}}</li>
-        {{/each}}
-    </ul>
-</body>
-</html>
+{{!< layouts/main}}
+
+<h1>Lista de Productos</h1>
+<ul>
+    {{#each products}}
+        <li>
+            <h2>{{this.name}}</h2>
+            <p>Precio: ${{this.price}}</p>
+            <a href="/products/{{this._id}}">Ver detalles</a>
+            <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+        </li>
+    {{/each}}
+</ul>
+
+<div>
+    {{#if hasPrevPage}}
+        <a href="/products?page={{prevPage}}&limit={{limit}}">Anterior</a>
+    {{/if}}
+    {{#if hasNextPage}}
+        <a href="/products?page={{nextPage}}&limit={{limit}}">Siguiente</a>
+    {{/if}}
+</div>
+
+<script>
+    async function addToCart(productId) {
+        try {
+            const response = await fetch("/api/carts/ID_DEL_CARRITO/products/" + productId, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.ok) {
+                alert("Producto agregado al carrito");
+            } else {
+                alert("Error al agregar el producto al carrito");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>

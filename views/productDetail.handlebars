@@ -1,0 +1,30 @@
+{{! Usa el layout principal }}
+{{!< layouts/main}}
+
+<h1>{{product.title}}</h1>
+<p>Precio: ${{product.price}}</p>
+<p>Descripción: {{product.description}}</p>
+<p>Categoría: {{product.category}}</p>
+<button onclick="addToCart('{{product.id}}')">Agregar al carrito</button>
+<a href="/products">Volver a la lista</a>
+
+<script>
+    // Función para agregar un producto al carrito
+    async function addToCart(productId) {
+        try {
+            const response = await fetch("/api/carts/ID_DEL_CARRITO/products/" + productId, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.ok) {
+                alert("Producto agregado al carrito");
+            } else {
+                alert("Error al agregar el producto al carrito");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>

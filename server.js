@@ -1,4 +1,5 @@
 const express = require("express");
+const connectDB = require("./config/db");
 const { engine } = require("express-handlebars");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -11,6 +12,8 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const PORT = 8080;
+
+connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

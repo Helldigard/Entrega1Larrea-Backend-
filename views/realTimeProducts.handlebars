@@ -22,7 +22,6 @@
     <script>
         const socket = io();
 
-        // 📌 Escuchar la actualización de productos y renderizar la lista
         socket.on("updateProducts", (products) => {
             const productList = document.getElementById("productList");
             productList.innerHTML = "";
@@ -31,7 +30,6 @@
             });
         });
 
-        // 📌 Simulación de agregar productos desde el cliente
         function addProduct() {
             const newProduct = {
                 title: "Producto " + Math.floor(Math.random() * 100),
