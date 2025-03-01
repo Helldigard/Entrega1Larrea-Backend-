@@ -1,4 +1,3 @@
-{{! Usa el layout principal }}
 {{!< layouts/main}}
 
 <h1>{{product.title}}</h1>
@@ -6,13 +5,13 @@
 <p>Descripción: {{product.description}}</p>
 <p>Categoría: {{product.category}}</p>
 <button onclick="addToCart('{{product.id}}')">Agregar al carrito</button>
-<a href="/products">Volver a la lista</a>
+<a href="/">Volver a la lista</a>
 
 <script>
-    // Función para agregar un producto al carrito
     async function addToCart(productId) {
         try {
-            const response = await fetch("/api/carts/ID_DEL_CARRITO/products/" + productId, {
+            const cartId = "64f1a2b3c9e77b001f8e4d9c"; // Reemplaza con el ID de un carrito existente
+            const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

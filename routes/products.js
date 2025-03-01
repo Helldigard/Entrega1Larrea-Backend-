@@ -46,12 +46,15 @@ router.get("/", async (req, res) => {
 });
 
 // obtiene producto por id
-router.get("/:pid", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const product = await Product.findById(req.params.pid);
-        product ? res.json(product) : res.status(404).json({ error: "Producto no encontrado" });
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
+        res.render("productDetail", { product });
     } catch (error) {
-        res.status(500).json({ error: "Error al buscar el producto" });
+        res.status(500).json({ error: "Error al obtener el producto" });
     }
 });
 

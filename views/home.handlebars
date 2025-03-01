@@ -4,10 +4,10 @@
 <ul>
     {{#each products}}
         <li>
-            <h2>{{this.name}}</h2>
+            <h2>{{this.title}}</h2>
             <p>Precio: ${{this.price}}</p>
-            <a href="/products/{{this._id}}">Ver detalles</a>
-            <button onclick="addToCart('{{this._id}}')">Agregar al carrito</button>
+            <a href="/products/{{this.id}}">Ver detalles</a>
+            <button onclick="addToCart('{{this.id}}')">Agregar al carrito</button>
         </li>
     {{/each}}
 </ul>
@@ -24,7 +24,28 @@
 <script>
     async function addToCart(productId) {
         try {
-            const response = await fetch("/api/carts/ID_DEL_CARRITO/products/" + productId, {
+            const cartId = "64f1a2b3c9e77b001f8e4d9c";
+            const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            if (response.ok) {
+                alert("Producto agregado al carrito");
+            } else {
+                alert("Error al agregar el producto al carrito");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>
+<script>
+    async function addToCart(productId) {
+        try {
+            const cartId = "{{cartId}}"; // Usa el ID del carrito pasado desde el servidor
+            const response = await fetch(`/api/carts/${cartId}/products/${productId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

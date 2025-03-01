@@ -4,14 +4,38 @@ const Product = require("../models/Product");
 
 const router = express.Router();
 
-// Ruta para crear un carrito
 router.post("/", async (req, res) => {
     try {
-        const cart = new Cart({ products: [] });
+        const cart = new Cart({ products: [] }); // Crea un carrito vacío
         await cart.save();
+        console.log("Carrito creado con ID:", cart._id); // Muestra el ID del carrito en la consola
         res.status(201).json(cart);
     } catch (error) {
         res.status(500).json({ error: "Error al crear el carrito" });
+    }
+});
+
+// Ruta para crear un carrito
+router.post("/:cid/products/:pid", async (req, res) => {
+    try {
+        const { cid, pid } = req.params;
+        const cart = await Cart.findById(cid);
+
+        if (!cart) {
+            return res.status(404).json({ error: "Carrito no encontrado" });
+        }
+
+        const productIndex = cart.products.findIndex(p => p.product.toString() === pid);
+        if (productIndex === -1) {
+            cart.products.push({ product: pid, quantity: 1 });
+        } else {
+            cart.products[productIndex].quantity += 1;
+        }
+
+        await cart.save();
+        res.json({ message: "Producto agregado al carrito", cart });
+    } catch (error) {
+        res.status(500).json({ error: "Error al agregar el producto al carrito" });
     }
 });
 

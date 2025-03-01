@@ -37,6 +37,15 @@ app.get("/realtimeproducts", (req, res) => {
     res.render("realTimeProducts");
 });
 
+app.get("/products", (req, res) => {
+    const products = readProducts();
+    res.render("products", { products }); 
+});
+
+app.get("/carts", (req, res) => {
+    res.render("carts"); 
+});
+
 
 io.on("connection", (socket) => {
     console.log("Un usuario se ha conectado");
@@ -58,12 +67,29 @@ io.on("connection", (socket) => {
     });
 });
 
-app.use("/api/products", productsRouter);
+app.use("/products", productsRouter);
+app.use("/carts", cartsRouter);
 app.use("/api/carts", cartsRouter);
+app.use("/api/products", productsRouter);
+
 
 server.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+const Cart = require("./models/Cart");
+
+async function createInitialCart() {
+    try {
+        const cart = new Cart({ products: [] });
+        await cart.save();
+        console.log("Carrito inicial creado con ID:", cart._id);
+    } catch (error) {
+        console.error("Error al crear el carrito inicial:", error);
+    }
+}
+
+createInitialCart();
 
 
 /*  GET /api/carts → Devuelve todos los carritos guardados.

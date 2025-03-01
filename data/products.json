@@ -20,5 +20,48 @@
     "stock": 20,
     "category": "Periféricos",
     "thumbnails": ["img/teclado1.png"]
+    },
+    {
+    "id": 3,
+    "title": "Disco Duro Externo 1TB",
+    "description": "Almacenamiento portátil con conexión USB 3.0 y alta velocidad de transferencia.",
+    "code": "HDD001",
+    "price": 90,
+    "stock": 30,
+    "category": "Almacenamiento",
+    "thumbnails": []
+    },
+    {
+    "id": 4,
+    "title": "Silla Gamer",
+    "description": "Silla Gamer roja ",
+    "code": "TEC456",
+    "price": 250,
+    "status": true,
+    "stock": 5,
+    "category": "Periféricos",
+    "thumbnails": ["img/teclado1.png"]
+    },
+    {
+    "id": 5,
+    "title": "Camara Web",
+    "description": "Camara Web full HD 1080p 60fps god",
+    "code": "TEC456",
+    "price": 120,
+    "status": true,
+    "stock": 26,
+    "category": "Periféricos",
+    "thumbnails": ["img/teclado1.png"]
+    },
+    {
+    "id": 6,
+    "title": "Monitor 144hz Gamer",
+    "description": "Teclado mecánico RGB con switches rojos",
+    "code": "TEC456",
+    "price": 300,
+    "status": true,
+    "stock": 13,
+    "category": "Periféricos",
+    "thumbnails": ["img/teclado1.png"]
     }
 ]  
